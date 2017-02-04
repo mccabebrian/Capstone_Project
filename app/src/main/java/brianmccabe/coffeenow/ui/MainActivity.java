@@ -5,40 +5,40 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.places.Places;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import brianmccabe.coffeenow.R;
+import brianmccabe.coffeenow.models.Results;
 
-public class MainActivity extends AppCompatActivity implements MainActivityPresenter,
-        GoogleApiClient.OnConnectionFailedListener {
+public class MainActivity extends AppCompatActivity implements MainActivityPresenter{
 
     MainActivityPresenterImpl mainActivityPresenter;
-    private GoogleApiClient mGoogleApiClient;
+    private ProgressBar spinner;
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        checkForPermissions();
-        createGoogleApiClient();
-    }
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-    public void createGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient
-                .Builder(this)
-                .addApi(Places.GEO_DATA_API)
-                .addApi(Places.PLACE_DETECTION_API)
-                .enableAutoManage( this, 0, this )
-                .build();
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("List"));
+        tabLayout.addTab(tabLayout.newTab().setText("Map"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+        checkForPermissions();
     }
 
     public void checkForPermissions() {
@@ -55,25 +55,49 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
     public void initPresenter() {
         mainActivityPresenter = new MainActivityPresenterImpl();
         mainActivityPresenter.init(this);
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if( mGoogleApiClient != null )
-            mGoogleApiClient.connect();
-    }
-
-    @Override
-    protected void onStop() {
-        if( mGoogleApiClient != null && mGoogleApiClient.isConnected() ) {
-            mGoogleApiClient.disconnect();
-        }
-        super.onStop();
     }
 
     @Override
     public void onLocationChanged(Location location) {
+        mainActivityPresenter.retrievePlaces(location);
+    }
+
+    @Override
+    public void onReceivedResults(Results[] results) {
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        final PagerAdapter adapter = new PagerAdapter
+                (getSupportFragmentManager(), tabLayout.getTabCount(), results);
+
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void showLoader() {
+        spinner.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoader() {
+        spinner.setVisibility(View.GONE);
     }
 
     private boolean checkIfAlreadyHavePermission() {
@@ -100,10 +124,5 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
             default:
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-
     }
 }

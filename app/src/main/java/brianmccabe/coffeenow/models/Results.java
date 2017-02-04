@@ -1,10 +1,14 @@
 package brianmccabe.coffeenow.models;
 
+import android.app.Service;
+
+import java.io.Serializable;
+
 /**
  * Created by brian on 29/01/2017.
  */
 
-public class Results {
+public class Results implements Serializable{
     private String icon;
 
     private String place_id;
