@@ -1,14 +1,27 @@
 package brianmccabe.coffeenow.ui;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import brianmccabe.coffeenow.R;
+import brianmccabe.coffeenow.models.Results;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,15 +31,9 @@ import brianmccabe.coffeenow.R;
  * Use the {@link CafeMapFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CafeMapFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class CafeMapFragment extends Fragment implements OnMapReadyCallback {
+    MapView mapView;
+    GoogleMap map;
 
     private OnFragmentInteractionListener mListener;
 
@@ -45,10 +52,6 @@ public class CafeMapFragment extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static CafeMapFragment newInstance(String param1, String param2) {
         CafeMapFragment fragment = new CafeMapFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -56,16 +59,26 @@ public class CafeMapFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
+
+    @Override
+    public void onResume() {
+        mapView.onResume();
+        super.onResume();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cafe_map, container, false);
+        final View view = inflater.inflate(R.layout.fragment_cafe_map, container, false);
+
+        mapView = (MapView) view.findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(this);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -79,6 +92,26 @@ public class CafeMapFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        googleMap.getUiSettings().setMapToolbarEnabled(true);
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+        Results[] results = (Results[]) getArguments().getSerializable("name");
+        for(int i =0; i<results.length; i++) {
+            if(results[i].getGeometry() == null || results[i].getGeometry().getLocation() == null) {
+                return;
+            }
+            googleMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(Float.parseFloat(results[i].getGeometry().getLocation().getLat()),
+                            Float.parseFloat(results[i].getGeometry().getLocation().getLng())))
+                    .title(results[i].getName()));
+        }
+
+       // googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(results[0].getGeometry().getLocation().getLat()), (Double.parseDouble(results[0].getGeometry().getLocation().getLng())), 12.0f)));
+
     }
 
     /**

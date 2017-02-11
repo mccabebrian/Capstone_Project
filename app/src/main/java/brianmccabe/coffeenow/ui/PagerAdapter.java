@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import brianmccabe.coffeenow.adapters.CafeListAdapter;
 import brianmccabe.coffeenow.models.Results;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
@@ -24,15 +23,18 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("name", results);
         switch (position) {
             case 0:
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("name", results);
+
                 CafeListFragment cafeListFragment = new CafeListFragment();
                 cafeListFragment.setArguments(bundle);
                 return cafeListFragment;
             case 1:
-                return new CafeMapFragment();
+                CafeMapFragment cafeMapFragment = new CafeMapFragment();
+                cafeMapFragment.setArguments(bundle);
+                return cafeMapFragment;
             default:
                 return null;
         }

@@ -4,6 +4,14 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+
+    <permission
+        android:name="brianmccabe.coffeenow.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature"/>
+    <uses-permission android:name="brianmccabe.coffeenow.permission.MAPS_RECEIVE"/>
 
     <application
         android:allowBackup="true"
@@ -20,9 +28,8 @@
         </activity>
 
         <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDeoWThFbcy0x7qNsRcd6rMAATy76Ea9AQ"/>
-
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyAwIycGPEoIDaej0cQ2JcVb_EN9ObEdI6Y"/>
     </application>
 
 </manifest>

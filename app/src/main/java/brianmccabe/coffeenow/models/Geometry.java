@@ -1,6 +1,5 @@
 package brianmccabe.coffeenow.models;
 
-import android.location.Location;
 
 /**
  * Created by brian on 29/01/2017.

@@ -35,7 +35,7 @@ class MainActivityPresenterImpl {
                 ApiClient.getClient().create(ApiInterface.class);
 
         String coordinates = location.getLatitude() + "," + location.getLongitude();
-        Call<PlacesResponse> call = apiService.getNearbyPlaces(coordinates, "2500", "cafe", "AIzaSyCC7-iGM8WNtePjBF_FMjEHi1YV7O5pClw");
+        Call<PlacesResponse> call = apiService.getNearbyPlaces(coordinates, "5500", "cafe", "AIzaSyCC7-iGM8WNtePjBF_FMjEHi1YV7O5pClw");
         call.enqueue(new Callback<PlacesResponse>() {
             @Override
             public void onResponse(Call<PlacesResponse>call, Response<PlacesResponse> response) {

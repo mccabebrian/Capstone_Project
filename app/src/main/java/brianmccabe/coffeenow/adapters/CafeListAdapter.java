@@ -6,9 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import brianmccabe.coffeenow.R;
+import brianmccabe.coffeenow.models.Opening_hours;
 import brianmccabe.coffeenow.models.Results;
 
 /**
@@ -19,6 +24,10 @@ public class CafeListAdapter extends ArrayAdapter<Results> implements View.OnCli
 
     private Results[] results;
     Context mContext;
+    TextView title;
+    TextView locationText;
+    ImageView cafeImage;
+    RatingBar ratingBar;
 
     // View lookup cache
     private static class ViewHolder {
@@ -34,6 +43,8 @@ public class CafeListAdapter extends ArrayAdapter<Results> implements View.OnCli
 
     @Override
     public void onClick(View v) {
+        //TODO ON CLICK
+
     }
 
 
@@ -48,15 +59,32 @@ public class CafeListAdapter extends ArrayAdapter<Results> implements View.OnCli
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.fragment_cafelist, parent, false);
-            viewHolder.txtName = (TextView) convertView.findViewById(R.id.content);
+            title = (TextView) convertView.findViewById(R.id.cafe_shop_title);
+            locationText = (TextView) convertView.findViewById(R.id.location_text);
+            cafeImage = (ImageView) convertView.findViewById(R.id.cafe_img);
+            ratingBar = (RatingBar) convertView.findViewById(R.id.rating);
             convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-
         }
 
-        viewHolder.txtName.setText(dataModel.getName());
-        // Return the completed view to render on screen
+        title.setText(dataModel.getName());
+        String openNow = "false";
+        Opening_hours openingHours = dataModel.getOpening_hours();
+        if(openingHours != null) {
+            openNow = openingHours.getOpen_now();
+        }
+
+        locationText.setText(dataModel.getVicinity());
+
+        Picasso.with(convertView.getContext())
+                .load(dataModel.getIcon())
+                .into(cafeImage);
+
+        String rating = dataModel.getRating();
+        if(rating == null) {
+            ratingBar.setVisibility(View.GONE);
+        } else {
+            ratingBar.setRating(Float.parseFloat(dataModel.getRating()));
+        }
         return convertView;
     }
 }
