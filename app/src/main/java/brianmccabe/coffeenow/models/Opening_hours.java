@@ -1,10 +1,12 @@
 package brianmccabe.coffeenow.models;
 
+import java.io.Serializable;
+
 /**
  * Created by brian on 29/01/2017.
  */
 
-public class Opening_hours {
+public class Opening_hours implements Serializable {
     private String open_now;
 
     private String[] weekday_text;

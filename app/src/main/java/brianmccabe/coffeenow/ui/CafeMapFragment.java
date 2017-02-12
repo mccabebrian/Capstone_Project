@@ -1,27 +1,25 @@
 package brianmccabe.coffeenow.ui;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
+import android.content.Intent;
+
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import brianmccabe.coffeenow.R;
 import brianmccabe.coffeenow.models.Results;
+
+import static brianmccabe.coffeenow.ui.CafeListFragment.SHOP_NAME_KEY;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +29,7 @@ import brianmccabe.coffeenow.models.Results;
  * Use the {@link CafeMapFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CafeMapFragment extends Fragment implements OnMapReadyCallback {
+public class CafeMapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
     MapView mapView;
     GoogleMap map;
 
@@ -104,14 +102,21 @@ public class CafeMapFragment extends Fragment implements OnMapReadyCallback {
             if(results[i].getGeometry() == null || results[i].getGeometry().getLocation() == null) {
                 return;
             }
+            googleMap.setOnInfoWindowClickListener(this);
             googleMap.addMarker(new MarkerOptions()
                     .position(new LatLng(Float.parseFloat(results[i].getGeometry().getLocation().getLat()),
                             Float.parseFloat(results[i].getGeometry().getLocation().getLng())))
-                    .title(results[i].getName()));
+                    .title(results[i].getName())
+                    .snippet(results[i].getName()));
         }
+    }
 
-       // googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(results[0].getGeometry().getLocation().getLat()), (Double.parseDouble(results[0].getGeometry().getLocation().getLng())), 12.0f)));
-
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        String name = marker.getTitle();
+        Intent intent = new Intent(getContext(), CoffeeMenuActivity.class);
+        intent.putExtra(SHOP_NAME_KEY, name);
+        startActivity(intent);
     }
 
     /**
@@ -125,7 +130,6 @@ public class CafeMapFragment extends Fragment implements OnMapReadyCallback {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

@@ -1,6 +1,7 @@
 package brianmccabe.coffeenow.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import brianmccabe.coffeenow.R;
 import brianmccabe.coffeenow.models.Opening_hours;
 import brianmccabe.coffeenow.models.Results;
+import brianmccabe.coffeenow.ui.CoffeeMenuActivity;
 
 /**
  * Created by brian on 04/02/2017.
@@ -43,7 +45,6 @@ public class CafeListAdapter extends ArrayAdapter<Results> implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        //TODO ON CLICK
 
     }
 
@@ -67,12 +68,6 @@ public class CafeListAdapter extends ArrayAdapter<Results> implements View.OnCli
         }
 
         title.setText(dataModel.getName());
-        String openNow = "false";
-        Opening_hours openingHours = dataModel.getOpening_hours();
-        if(openingHours != null) {
-            openNow = openingHours.getOpen_now();
-        }
-
         locationText.setText(dataModel.getVicinity());
 
         Picasso.with(convertView.getContext())

@@ -1,11 +1,13 @@
 package brianmccabe.coffeenow.models;
 
 
+import java.io.Serializable;
+
 /**
  * Created by brian on 29/01/2017.
  */
 
-public class Geometry {
+public class Geometry implements Serializable {
     private Viewport viewport;
 
     private Location location;

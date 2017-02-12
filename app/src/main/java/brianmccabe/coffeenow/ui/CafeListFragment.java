@@ -1,10 +1,12 @@
 package brianmccabe.coffeenow.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import brianmccabe.coffeenow.R;
@@ -13,21 +15,16 @@ import brianmccabe.coffeenow.models.Results;
 
 public class CafeListFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     ListView list;
     CafeListAdapter cafeListAdapter;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+    public static final String SHOP_NAME_KEY = "shopName";
+
     public CafeListFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static CafeListFragment newInstance(int columnCount) {
         CafeListFragment fragment = new CafeListFragment();
@@ -50,12 +47,19 @@ public class CafeListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cafelist_list, container, false);
-        Results[] results = (Results[]) getArguments().getSerializable("name");
+        final Results[] results = (Results[]) getArguments().getSerializable("name");
 
         list = (ListView) view.findViewById(R.id.list);
         cafeListAdapter = new CafeListAdapter(results, getContext());
         list.setAdapter(cafeListAdapter);
-
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getContext(), CoffeeMenuActivity.class);
+                intent.putExtra(SHOP_NAME_KEY, results[position].getName());
+                startActivity(intent);
+            }
+        });
         return view;
     }
 }

@@ -30,7 +30,6 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Starbucks"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="20sp"
             android:textColor="@color/colorPrimaryText" />
@@ -42,8 +41,7 @@
             android:textColor="@color/colorSecondaryText"
             android:layout_below="@+id/cafe_shop_title"
             android:ellipsize="end"
-            android:maxLines="2"
-            android:text="test address"/>
+            android:maxLines="2"/>
 
         <RatingBar
             android:id="@+id/rating"

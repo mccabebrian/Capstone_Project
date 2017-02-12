@@ -16,6 +16,7 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 
+import brianmccabe.coffeenow.R;
 import brianmccabe.coffeenow.ui.MainActivity;
 import brianmccabe.coffeenow.ui.MainActivityPresenter;
 
@@ -155,35 +156,22 @@ public class LocationTracker extends Service implements LocationListener {
     public void showSettingsAlert(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
-        // Setting Dialog Title
-        //TODO strings
-        alertDialog.setTitle("GPS is settings");
+        alertDialog.setTitle(R.string.gps_title);
+        alertDialog.setMessage(R.string.gps_body);
 
-        // Setting Dialog Message
-        //TODO strings
-        alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
-
-        // Setting Icon to Dialog
-        //alertDialog.setIcon(R.drawable.delete);
-
-        // On pressing Settings button
-        //TODO strings
-        alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(R.string.gps_positive, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 mContext.startActivity(intent);
             }
         });
 
-        // on pressing cancel button
-        //TODO strings
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton(R.string.gps_negative, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
 
-        // Showing Alert Message
         alertDialog.show();
     }
 }

@@ -1,10 +1,12 @@
 package brianmccabe.coffeenow.models;
 
+import java.io.Serializable;
+
 /**
  * Created by brian on 29/01/2017.
  */
 
-public class Northeast {
+public class Northeast implements Serializable {
     private String lng;
 
     private String lat;

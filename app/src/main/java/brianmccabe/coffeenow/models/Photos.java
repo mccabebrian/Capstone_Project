@@ -1,10 +1,12 @@
 package brianmccabe.coffeenow.models;
 
+import java.io.Serializable;
+
 /**
  * Created by brian on 29/01/2017.
  */
 
-public class Photos {
+public class Photos implements Serializable {
     private String photo_reference;
 
     private String height;
