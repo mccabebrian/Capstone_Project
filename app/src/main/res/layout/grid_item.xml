@@ -17,6 +17,7 @@
         android:layout_below="@id/coffee_name"
         android:layout_centerInParent="true"
         android:layout_marginTop="10dp"
+        android:contentDescription="@string/coffee_image"
         android:src="@drawable/americano" />
 
     <LinearLayout

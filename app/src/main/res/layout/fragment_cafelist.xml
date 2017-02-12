@@ -13,6 +13,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
+        android:contentDescription="@string/coffee_icon"
         android:src="@drawable/cast_album_art_placeholder" />
 
     <RelativeLayout

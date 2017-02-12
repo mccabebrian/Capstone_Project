@@ -33,8 +33,8 @@ public class CoffeeMenuActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Menu"));
-        tabLayout.addTab(tabLayout.newTab().setText("Favorites"));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_menu));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_favorites));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         initFragments();

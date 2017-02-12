@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
         setSupportActionBar(toolbar);
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("List"));
-        tabLayout.addTab(tabLayout.newTab().setText("Map"));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_list));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_map));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         spinner = (ProgressBar)findViewById(R.id.progressBar1);
