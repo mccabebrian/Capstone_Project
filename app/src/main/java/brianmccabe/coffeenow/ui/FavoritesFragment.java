@@ -15,7 +15,7 @@ import java.util.List;
 import brianmccabe.coffeenow.R;
 import brianmccabe.coffeenow.adapters.MenuItemAdapter;
 import brianmccabe.coffeenow.data.DatabaseHandler;
-import brianmccabe.coffeenow.models.temp;
+import brianmccabe.coffeenow.models.Coffee;
 
 
 public class FavoritesFragment extends Fragment {
@@ -39,7 +39,7 @@ public class FavoritesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
         // Inflate the layout for this fragment
         DatabaseHandler db = new DatabaseHandler(getContext());
-        List<temp> coffees = db.getAllCoffees();
+        List<Coffee> coffees = db.getAllCoffees();
 
         if (coffees.size() == 0) {
             return view;

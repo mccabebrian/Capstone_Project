@@ -4,16 +4,16 @@ package brianmccabe.coffeenow.models;
  * Created by brian on 11/02/2017.
  */
 
-public class temp {
+public class Coffee {
     private String name;
     private byte[] coffeeImage;
     private String price;
 
-    public temp() {
+    public Coffee() {
 
     }
 
-    public temp(String name, byte[] coffeeImage, String price) {
+    public Coffee(String name, byte[] coffeeImage, String price) {
         this.name = name;
         this.coffeeImage = coffeeImage;
         this.price = price;
