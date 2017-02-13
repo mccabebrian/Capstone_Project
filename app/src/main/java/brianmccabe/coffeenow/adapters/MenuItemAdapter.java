@@ -21,13 +21,13 @@ import brianmccabe.coffeenow.models.Coffee;
  * Created by brian on 11/02/2017.
  */
 
-public class temp extends BaseAdapter {
+public class MenuItemAdapter extends BaseAdapter {
 
     List<Coffee> coffeeList;
     Context context;
     private static LayoutInflater inflater = null;
 
-    public temp(Context context, List<Coffee> list) {
+    public MenuItemAdapter(Context context, List<Coffee> list) {
         this.coffeeList = list;
         this.context = context;
         inflater = (LayoutInflater) context.

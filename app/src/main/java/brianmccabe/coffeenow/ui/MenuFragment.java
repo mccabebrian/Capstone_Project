@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import brianmccabe.coffeenow.R;
-import brianmccabe.coffeenow.adapters.temp;
+import brianmccabe.coffeenow.adapters.MenuItemAdapter;
 import brianmccabe.coffeenow.models.Coffee;
 
 public class MenuFragment extends Fragment {
@@ -64,7 +64,7 @@ public class MenuFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        gv.setAdapter(new temp(getContext(), coffees));
+        gv.setAdapter(new MenuItemAdapter(getContext(), coffees));
         return view;
     }
 

@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import brianmccabe.coffeenow.R;
-import brianmccabe.coffeenow.adapters.temp;
+import brianmccabe.coffeenow.adapters.MenuItemAdapter;
 import brianmccabe.coffeenow.data.DatabaseHandler;
 import brianmccabe.coffeenow.models.Coffee;
 
@@ -58,7 +58,7 @@ public class FavoritesFragment extends Fragment {
         });
 
         gv.setVisibility(View.VISIBLE);
-        gv.setAdapter(new temp(getContext(), coffees));
+        gv.setAdapter(new MenuItemAdapter(getContext(), coffees));
         return view;
     }
 }
