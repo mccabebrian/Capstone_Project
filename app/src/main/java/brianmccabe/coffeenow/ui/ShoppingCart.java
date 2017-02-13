@@ -1,5 +1,10 @@
 package brianmccabe.coffeenow.ui;
 
+import android.app.LoaderManager;
+import android.content.CursorLoader;
+import android.content.Loader;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -14,10 +19,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import brianmccabe.coffeenow.R;
 import brianmccabe.coffeenow.adapters.CartItemAdapter;
+import brianmccabe.coffeenow.data.CoffeeNowContentProvider;
 import brianmccabe.coffeenow.data.DatabaseHandler;
 import brianmccabe.coffeenow.models.Coffee;
 
@@ -45,7 +52,32 @@ public class ShoppingCart extends AppCompatActivity {
 
         cartList = (ListView) findViewById(R.id.cart_list);
         final DatabaseHandler db = new DatabaseHandler(this);
-        List<Coffee> coffeeList = db.getAllCoffeesInCart();
+        List<Coffee> coffeeList =new ArrayList<>();
+        String URL = CoffeeNowContentProvider.URL_CART;
+
+        Uri coffee = Uri.parse(URL);
+        Cursor c = getContentResolver().query(coffee, null, null, null, getString(R.string.content_provider_name));
+
+        if (c != null) {
+            if (c.moveToFirst()) {
+                do {
+                    byte[] bytes;
+                    String name = c.getString(c.getColumnIndex(CoffeeNowContentProvider.name));
+
+                    bytes = c.getBlob(c.getColumnIndex(CoffeeNowContentProvider.icon));
+
+                    String price = c.getString(c.getColumnIndex(CoffeeNowContentProvider.price));
+
+                    Coffee coffee1 = new Coffee(name, bytes, price);
+                    coffeeList.add(coffee1);
+                } while (c.moveToNext());
+            }
+
+            c.close();
+        }
+
+
+
         cartList.setAdapter(new CartItemAdapter(this, coffeeList));
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override

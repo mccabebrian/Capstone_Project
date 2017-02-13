@@ -3,6 +3,8 @@ package brianmccabe.coffeenow.factory;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import brianmccabe.coffeenow.R;
+import brianmccabe.coffeenow.data.CoffeeNowContentProvider;
 import brianmccabe.coffeenow.data.DatabaseHandler;
 import brianmccabe.coffeenow.models.Coffee;
 
@@ -34,7 +37,32 @@ public class WidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsF
     }
 
     private void updateWidgetListView() {
-        this.widgetList = db.getAllCoffees();
+        List<Coffee> coffeeList =new ArrayList<>();
+
+        String URL = CoffeeNowContentProvider.URL;
+
+        Uri coffee = Uri.parse(URL);
+        Cursor c = context.getContentResolver().query(coffee, null, null, null, context.getString(R.string.content_provider_name));
+        if (c != null) {
+            if (c.moveToFirst()) {
+                do {
+                    byte[] bytes;
+                    String name = c.getString(c.getColumnIndex(CoffeeNowContentProvider.name));
+
+                    bytes = c.getBlob(c.getColumnIndex(CoffeeNowContentProvider.icon));
+
+                    String price = c.getString(c.getColumnIndex(CoffeeNowContentProvider.price));
+
+                    Coffee coffee1 = new Coffee(name, bytes, price);
+                    coffeeList.add(coffee1);
+                } while (c.moveToNext());
+            }
+
+            c.close();
+        }
+
+
+        this.widgetList = coffeeList;
     }
 
     @Override

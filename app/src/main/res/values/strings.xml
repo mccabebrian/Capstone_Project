@@ -20,5 +20,6 @@
     <string name="tab_map">Map</string>
     <string name="tab_menu">Menu</string>
     <string name="tab_favorites">Favorites</string>
+    <string name="content_provider_name">name</string>
 
 </resources>

@@ -53,8 +53,17 @@
 
         <service
             android:name=".service.WidgetService"
-            android:exported="false"
+            android:exported="true"
+            android:readPermission="au.com.example.READ_CONTENT"
+
             android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <provider android:name="brianmccabe.coffeenow.data.CoffeeNowContentProvider"
+            android:readPermission="au.com.example.READ_CONTENT"
+            android:writePermission="au.com.example.WRITE_CONTENT"
+            android:multiprocess="true"
+            android:exported="true"
+            android:authorities="com.abcd"/>
     </application>
 
 </manifest>

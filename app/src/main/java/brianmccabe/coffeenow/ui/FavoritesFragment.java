@@ -1,6 +1,8 @@
 package brianmccabe.coffeenow.ui;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -10,10 +12,12 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import brianmccabe.coffeenow.R;
 import brianmccabe.coffeenow.adapters.MenuItemAdapter;
+import brianmccabe.coffeenow.data.CoffeeNowContentProvider;
 import brianmccabe.coffeenow.data.DatabaseHandler;
 import brianmccabe.coffeenow.models.Coffee;
 
@@ -39,7 +43,30 @@ public class FavoritesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
         // Inflate the layout for this fragment
         DatabaseHandler db = new DatabaseHandler(getContext());
-        List<Coffee> coffees = db.getAllCoffees();
+
+
+        String URL = CoffeeNowContentProvider.URL;
+
+        Uri coffee = Uri.parse(URL);
+        Cursor c = getActivity().getContentResolver().query(coffee, null, null, null, getContext().getString(R.string.content_provider_name));
+        List<Coffee> coffees = new ArrayList<>();
+        if (c != null) {
+            if (c.moveToFirst()) {
+                do {
+                    byte[] bytes;
+                    String name = c.getString(c.getColumnIndex(CoffeeNowContentProvider.name));
+
+                    bytes = c.getBlob(c.getColumnIndex(CoffeeNowContentProvider.icon));
+
+                    String price = c.getString(c.getColumnIndex(CoffeeNowContentProvider.price));
+
+                    Coffee coffee1 = new Coffee(name, bytes, price);
+                    coffees.add(coffee1);
+                } while (c.moveToNext());
+            }
+
+            c.close();
+        }
 
         if (coffees.size() == 0) {
             return view;

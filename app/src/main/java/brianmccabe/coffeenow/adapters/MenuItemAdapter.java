@@ -1,8 +1,11 @@
 package brianmccabe.coffeenow.adapters;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +17,10 @@ import android.widget.TextView;
 import java.util.List;
 
 import brianmccabe.coffeenow.R;
+import brianmccabe.coffeenow.data.CoffeeNowContentProvider;
 import brianmccabe.coffeenow.data.DatabaseHandler;
 import brianmccabe.coffeenow.models.Coffee;
+import retrofit2.http.Url;
 
 /**
  * Created by brian on 11/02/2017.
@@ -72,30 +77,68 @@ public class MenuItemAdapter extends BaseAdapter {
         titleText.setText(coffeeList.get(position).getName());
         coffeeImage.setImageBitmap(bmp);
 
-        if (db.getCoffee(coffeeList.get(position).getName()) != null) {
-            favoritesButton.setVisibility(View.GONE);
-            return rowView;
+
+        String URL = CoffeeNowContentProvider.URL;
+
+        Uri coffee = Uri.parse(URL);
+        Cursor c = context.getContentResolver().query(coffee, null, null, null, context.getString(R.string.content_provider_name));
+        if (c != null) {
+            if (c.moveToFirst()) {
+                do {
+                    String name = c.getString(c.getColumnIndex(CoffeeNowContentProvider.name));
+                    if(coffeeList.get(position).getName().equals(name)) {
+                        return rowView;
+                    }
+                } while (c.moveToNext());
+            }
+
+            c.close();
         }
 
         favoritesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.addCoffee(coffeeList.get(position));
-                favoritesButton.setVisibility(View.GONE);
+                byte[] image = coffeeList.get(position).getCoffeeImage();
+
+                    ContentValues values = new ContentValues();
+                    values.put(CoffeeNowContentProvider.name, coffeeList.get(position).getName());
+                    values.put(CoffeeNowContentProvider.icon, image);
+                    values.put(CoffeeNowContentProvider.price, coffeeList.get(position).getPrice());
+                    context.getContentResolver().insert(CoffeeNowContentProvider.CONTENT_URI, values);
+                    favoritesButton.setVisibility(View.GONE);
+
             }
         });
 
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.addToCart(coffeeList.get(position));
-                addToCartButton.setVisibility(View.GONE);
+                byte[] image = coffeeList.get(position).getCoffeeImage();
+
+                ContentValues values = new ContentValues();
+                values.put(CoffeeNowContentProvider.name, coffeeList.get(position).getName());
+                values.put(CoffeeNowContentProvider.icon, image);
+                values.put(CoffeeNowContentProvider.price, coffeeList.get(position).getPrice());
+                context.getContentResolver().insert(CoffeeNowContentProvider.CONTENT_URI_CART, values);
             }
         });
 
-        if (db.getCoffeeFromCart(coffeeList.get(position).getName()) != null) {
-            addToCartButton.setEnabled(false);
-            return rowView;
+        String URLCart = CoffeeNowContentProvider.URL_CART;
+
+        Uri coffeeCart = Uri.parse(URLCart);
+        Cursor cursor = context.getContentResolver().query(coffeeCart, null, null, null, context.getString(R.string.content_provider_name));
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    String name = cursor.getString(cursor.getColumnIndex(CoffeeNowContentProvider.name));
+                    if(coffeeList.get(position).getName().equals(name)) {
+                        addToCartButton.setEnabled(false);
+                        return rowView;
+                    }
+                } while (cursor.moveToNext());
+            }
+
+            cursor.close();
         }
 
         return rowView;
