@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import brianmccabe.coffeenow.R;
-import brianmccabe.coffeenow.models.Coffee;
+import brianmccabe.coffeenow.models.temp;
 
 /**
  * Created by brian on 12/02/2017.
@@ -19,9 +19,9 @@ import brianmccabe.coffeenow.models.Coffee;
 public class CartItemAdapter extends BaseAdapter {
     private static LayoutInflater inflater = null;
     Context context;
-    List<Coffee> coffees;
+    List<temp> coffees;
 
-    public CartItemAdapter(Context context, List<Coffee> coffeeList) {
+    public CartItemAdapter(Context context, List<temp> coffeeList) {
         inflater = (LayoutInflater) context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;

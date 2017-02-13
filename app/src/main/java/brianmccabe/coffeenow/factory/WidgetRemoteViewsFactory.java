@@ -11,7 +11,7 @@ import java.util.List;
 
 import brianmccabe.coffeenow.R;
 import brianmccabe.coffeenow.data.DatabaseHandler;
-import brianmccabe.coffeenow.models.Coffee;
+import brianmccabe.coffeenow.models.temp;
 
 /**
  * Created by brian on 12/02/2017.
@@ -21,7 +21,7 @@ public class WidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsF
     private Context context = null;
     private int appWidgetId;
 
-    private List<Coffee> widgetList = new ArrayList<>();
+    private List<temp> widgetList = new ArrayList<>();
     private DatabaseHandler db;
 
     public WidgetRemoteViewsFactory(Context context, Intent intent) {

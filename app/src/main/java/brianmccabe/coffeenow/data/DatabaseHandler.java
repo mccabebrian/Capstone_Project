@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import brianmccabe.coffeenow.models.Coffee;
+import brianmccabe.coffeenow.models.temp;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -53,7 +53,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addCoffee(Coffee coffee) {
+    public void addCoffee(temp coffee) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -66,7 +66,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    public void addToCart(Coffee coffee) {
+    public void addToCart(temp coffee) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -79,8 +79,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    public List<Coffee> getAllCoffees() {
-        List<Coffee> contactList = new ArrayList<Coffee>();
+    public List<temp> getAllCoffees() {
+        List<temp> contactList = new ArrayList<temp>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_FAVORITES;
 
@@ -90,7 +90,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Coffee contact = new Coffee();
+                temp contact = new temp();
                 contact.setName(cursor.getString(0));
                 contact.setCoffeeImage(cursor.getBlob(1));
                 contact.setPrice(cursor.getString(2));
@@ -100,8 +100,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return contactList;
     }
 
-    public List<Coffee> getAllCoffeesInCart() {
-        List<Coffee> contactList = new ArrayList<Coffee>();
+    public List<temp> getAllCoffeesInCart() {
+        List<temp> contactList = new ArrayList<temp>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_CART;
 
@@ -111,7 +111,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Coffee contact = new Coffee();
+                temp contact = new temp();
                 contact.setName(cursor.getString(0));
                 contact.setCoffeeImage(cursor.getBlob(1));
                 contact.setPrice(cursor.getString(2));
@@ -121,7 +121,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return contactList;
     }
 
-    public Coffee getCoffee(String name) {
+    public temp getCoffee(String name) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_FAVORITES, new String[]{KEY_NAME,
@@ -134,11 +134,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor == null || cursor.getCount() == 0) {
             return null;
         }
-        return new Coffee(cursor.getString(0),
+        return new temp(cursor.getString(0),
                 cursor.getBlob(1), cursor.getString(2));
     }
 
-    public Coffee getCoffeeFromCart(String name) {
+    public temp getCoffeeFromCart(String name) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_CART, new String[]{KEY_NAME,
@@ -151,7 +151,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor == null || cursor.getCount() == 0) {
             return null;
         }
-        return new Coffee(cursor.getString(0),
+        return new temp(cursor.getString(0),
                 cursor.getBlob(1), cursor.getString(2));
     }
 }

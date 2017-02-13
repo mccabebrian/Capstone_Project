@@ -19,7 +19,7 @@ import java.util.List;
 import brianmccabe.coffeenow.R;
 import brianmccabe.coffeenow.adapters.CartItemAdapter;
 import brianmccabe.coffeenow.data.DatabaseHandler;
-import brianmccabe.coffeenow.models.Coffee;
+import brianmccabe.coffeenow.models.temp;
 
 public class ShoppingCart extends AppCompatActivity {
     TextInputLayout inputLayoutEmail;
@@ -45,7 +45,7 @@ public class ShoppingCart extends AppCompatActivity {
 
         cartList = (ListView) findViewById(R.id.cart_list);
         final DatabaseHandler db = new DatabaseHandler(this);
-        List<Coffee> coffeeList = db.getAllCoffeesInCart();
+        List<temp> coffeeList = db.getAllCoffeesInCart();
         cartList.setAdapter(new CartItemAdapter(this, coffeeList));
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override

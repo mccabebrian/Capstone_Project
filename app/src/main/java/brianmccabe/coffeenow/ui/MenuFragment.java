@@ -17,7 +17,7 @@ import java.util.List;
 
 import brianmccabe.coffeenow.R;
 import brianmccabe.coffeenow.adapters.MenuItemAdapter;
-import brianmccabe.coffeenow.models.Coffee;
+import brianmccabe.coffeenow.models.temp;
 
 public class MenuFragment extends Fragment {
     GridView gv;
@@ -45,14 +45,14 @@ public class MenuFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
         FloatingActionButton cartButton;
 
-        List<Coffee> coffees = new ArrayList<>();
-        coffees.add(new Coffee(AMERICANO_KEY, getByteFromDrawable(R.drawable.americano), "1.20"));
-        coffees.add(new Coffee(MACHIATTO_KEY, getByteFromDrawable(R.drawable.machiatto), "2.20"));
-        coffees.add(new Coffee(LATE_KEY, getByteFromDrawable(R.drawable.late), "2.30"));
-        coffees.add(new Coffee(ESPRESSO_KEY, getByteFromDrawable(R.drawable.espresso), "1.70"));
-        coffees.add(new Coffee(MOCHA_KEY, getByteFromDrawable(R.drawable.mocha), "1.90"));
-        coffees.add(new Coffee(CAPPUCCINO_KEY, getByteFromDrawable(R.drawable.cappuccino), "2.80"));
-        coffees.add(new Coffee(BREVE_KEY, getByteFromDrawable(R.drawable.breve), "3.20"));
+        List<temp> coffees = new ArrayList<>();
+        coffees.add(new temp(AMERICANO_KEY, getByteFromDrawable(R.drawable.americano), "1.20"));
+        coffees.add(new temp(MACHIATTO_KEY, getByteFromDrawable(R.drawable.machiatto), "2.20"));
+        coffees.add(new temp(LATE_KEY, getByteFromDrawable(R.drawable.late), "2.30"));
+        coffees.add(new temp(ESPRESSO_KEY, getByteFromDrawable(R.drawable.espresso), "1.70"));
+        coffees.add(new temp(MOCHA_KEY, getByteFromDrawable(R.drawable.mocha), "1.90"));
+        coffees.add(new temp(CAPPUCCINO_KEY, getByteFromDrawable(R.drawable.cappuccino), "2.80"));
+        coffees.add(new temp(BREVE_KEY, getByteFromDrawable(R.drawable.breve), "3.20"));
 
         gv = (GridView) view.findViewById(R.id.gridview);
         cartButton = (FloatingActionButton) view.findViewById(R.id.cart_button);
