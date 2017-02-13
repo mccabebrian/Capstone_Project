@@ -10,7 +10,10 @@ import brianmccabe.coffeenow.models.Results;
 
 public interface MainActivityPresenter {
     void onLocationChanged(Location location);
+
     void onReceivedResults(Results[] results);
+
     void showLoader();
+
     void hideLoader();
 }

@@ -15,43 +15,35 @@ public class Photos implements Serializable {
 
     private String width;
 
-    public String getPhoto_reference ()
-    {
+    public String getPhoto_reference() {
         return photo_reference;
     }
 
-    public void setPhoto_reference (String photo_reference)
-    {
+    public void setPhoto_reference(String photo_reference) {
         this.photo_reference = photo_reference;
     }
 
-    public String getHeight ()
-    {
+    public String getHeight() {
         return height;
     }
 
-    public void setHeight (String height)
-    {
+    public void setHeight(String height) {
         this.height = height;
     }
 
-    public String[] getHtml_attributions ()
-    {
+    public String[] getHtml_attributions() {
         return html_attributions;
     }
 
-    public void setHtml_attributions (String[] html_attributions)
-    {
+    public void setHtml_attributions(String[] html_attributions) {
         this.html_attributions = html_attributions;
     }
 
-    public String getWidth ()
-    {
+    public String getWidth() {
         return width;
     }
 
-    public void setWidth (String width)
-    {
+    public void setWidth(String width) {
         this.width = width;
     }
 

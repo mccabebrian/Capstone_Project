@@ -17,8 +17,7 @@ import brianmccabe.coffeenow.service.WidgetService;
 public class CoffeeNowWidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        for(int i=0;i<appWidgetIds.length;i++)
-        {
+        for (int i = 0; i < appWidgetIds.length; i++) {
             RemoteViews rv = new RemoteViews(context.getPackageName(),
                     R.layout.widget_layout);
 

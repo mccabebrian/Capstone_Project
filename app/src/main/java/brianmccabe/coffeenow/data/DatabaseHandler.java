@@ -124,14 +124,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public Coffee getCoffee(String name) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_FAVORITES, new String[] {KEY_NAME,
-                KEY_COFFEE_IMAGE, KEY_PRICE }, KEY_NAME + "=?",
-                new String[] { String.valueOf(name) }, null, null, null, null);
+        Cursor cursor = db.query(TABLE_FAVORITES, new String[]{KEY_NAME,
+                        KEY_COFFEE_IMAGE, KEY_PRICE}, KEY_NAME + "=?",
+                new String[]{String.valueOf(name)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
 
-        if(cursor == null || cursor.getCount() == 0){
+        if (cursor == null || cursor.getCount() == 0) {
             return null;
         }
         return new Coffee(cursor.getString(0),
@@ -141,14 +141,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public Coffee getCoffeeFromCart(String name) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_CART, new String[] {KEY_NAME,
-                        KEY_COFFEE_IMAGE, KEY_PRICE }, KEY_NAME + "=?",
-                new String[] { String.valueOf(name) }, null, null, null, null);
+        Cursor cursor = db.query(TABLE_CART, new String[]{KEY_NAME,
+                        KEY_COFFEE_IMAGE, KEY_PRICE}, KEY_NAME + "=?",
+                new String[]{String.valueOf(name)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
 
-        if(cursor == null || cursor.getCount() == 0){
+        if (cursor == null || cursor.getCount() == 0) {
             return null;
         }
         return new Coffee(cursor.getString(0),

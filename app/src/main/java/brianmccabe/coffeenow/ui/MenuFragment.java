@@ -54,8 +54,8 @@ public class MenuFragment extends Fragment {
         coffees.add(new Coffee(CAPPUCCINO_KEY, getByteFromDrawable(R.drawable.cappuccino), "2.80"));
         coffees.add(new Coffee(BREVE_KEY, getByteFromDrawable(R.drawable.breve), "3.20"));
 
-        gv=(GridView) view.findViewById(R.id.gridview);
-        cartButton =(FloatingActionButton) view.findViewById(R.id.cart_button);
+        gv = (GridView) view.findViewById(R.id.gridview);
+        cartButton = (FloatingActionButton) view.findViewById(R.id.cart_button);
 
         cartButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -16,6 +16,7 @@ import java.util.List;
 import brianmccabe.coffeenow.R;
 import brianmccabe.coffeenow.data.DatabaseHandler;
 import brianmccabe.coffeenow.models.Coffee;
+
 /**
  * Created by brian on 11/02/2017.
  */
@@ -24,12 +25,12 @@ public class MenuItemAdapter extends BaseAdapter {
 
     List<Coffee> coffeeList;
     Context context;
-    private static LayoutInflater inflater=null;
+    private static LayoutInflater inflater = null;
 
     public MenuItemAdapter(Context context, List<Coffee> list) {
         this.coffeeList = list;
-        this.context=context;
-        inflater = ( LayoutInflater )context.
+        this.context = context;
+        inflater = (LayoutInflater) context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -61,8 +62,8 @@ public class MenuItemAdapter extends BaseAdapter {
         Bitmap bmp = BitmapFactory.decodeByteArray(image, 0, image.length);
 
         rowView = inflater.inflate(R.layout.grid_item, null);
-        titleText =(TextView) rowView.findViewById(R.id.coffee_name);
-        coffeeImage =(ImageView) rowView.findViewById(R.id.coffee_img);
+        titleText = (TextView) rowView.findViewById(R.id.coffee_name);
+        coffeeImage = (ImageView) rowView.findViewById(R.id.coffee_img);
         favoritesButton = (Button) rowView.findViewById(R.id.fav_button);
         addToCartButton = (Button) rowView.findViewById(R.id.cart_button);
 
@@ -71,7 +72,7 @@ public class MenuItemAdapter extends BaseAdapter {
         titleText.setText(coffeeList.get(position).getName());
         coffeeImage.setImageBitmap(bmp);
 
-        if(db.getCoffee(coffeeList.get(position).getName()) != null) {
+        if (db.getCoffee(coffeeList.get(position).getName()) != null) {
             favoritesButton.setVisibility(View.GONE);
             return rowView;
         }
@@ -92,7 +93,7 @@ public class MenuItemAdapter extends BaseAdapter {
             }
         });
 
-        if(db.getCoffeeFromCart(coffeeList.get(position).getName()) != null) {
+        if (db.getCoffeeFromCart(coffeeList.get(position).getName()) != null) {
             addToCartButton.setEnabled(false);
             return rowView;
         }

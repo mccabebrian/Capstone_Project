@@ -9,12 +9,10 @@ import brianmccabe.coffeenow.factory.WidgetRemoteViewsFactory;
  * Created by brian on 12/02/2017.
  */
 
-public class WidgetService extends RemoteViewsService
-{
+public class WidgetService extends RemoteViewsService {
 
     @Override
-    public RemoteViewsFactory onGetViewFactory(Intent intent)
-    {
+    public RemoteViewsFactory onGetViewFactory(Intent intent) {
         return (new WidgetRemoteViewsFactory(this.getApplicationContext(), intent));
     }
 

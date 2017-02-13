@@ -18,7 +18,7 @@ import android.widget.ProgressBar;
 import brianmccabe.coffeenow.R;
 import brianmccabe.coffeenow.models.Results;
 
-public class MainActivity extends AppCompatActivity implements MainActivityPresenter{
+public class MainActivity extends AppCompatActivity implements MainActivityPresenter {
 
     MainActivityPresenterImpl mainActivityPresenter;
     private ProgressBar spinner;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_map));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+        spinner = (ProgressBar) findViewById(R.id.progressBar1);
         checkForPermissions();
     }
 

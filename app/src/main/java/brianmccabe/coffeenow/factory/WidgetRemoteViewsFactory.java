@@ -17,16 +17,14 @@ import brianmccabe.coffeenow.models.Coffee;
  * Created by brian on 12/02/2017.
  */
 
-public class WidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory
-{
+public class WidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     private Context context = null;
     private int appWidgetId;
 
     private List<Coffee> widgetList = new ArrayList<>();
     private DatabaseHandler db;
 
-    public WidgetRemoteViewsFactory(Context context, Intent intent)
-    {
+    public WidgetRemoteViewsFactory(Context context, Intent intent) {
         this.context = context;
         appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
@@ -35,36 +33,31 @@ public class WidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsF
 
     }
 
-    private void updateWidgetListView()
-    {
+    private void updateWidgetListView() {
         this.widgetList = db.getAllCoffees();
     }
 
     @Override
-    public int getCount()
-    {
+    public int getCount() {
         return widgetList.size();
     }
 
     @Override
-    public long getItemId(int position)
-    {
+    public long getItemId(int position) {
         return position;
     }
 
     @Override
-    public RemoteViews getLoadingView()
-    {
+    public RemoteViews getLoadingView() {
         return null;
     }
 
     @Override
-    public RemoteViews getViewAt(int position)
-    {
+    public RemoteViews getViewAt(int position) {
         RemoteViews remoteView = new RemoteViews(context.getPackageName(),
                 R.layout.listview_row_item);
 
-        if(widgetList.size() == 0) {
+        if (widgetList.size() == 0) {
             remoteView.setTextViewText(R.id.coffee_item, context.getString(R.string.no_favorites_text));
             return remoteView;
         }
@@ -75,32 +68,27 @@ public class WidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsF
     }
 
     @Override
-    public int getViewTypeCount()
-    {
+    public int getViewTypeCount() {
         return widgetList.size();
     }
 
     @Override
-    public boolean hasStableIds()
-    {
+    public boolean hasStableIds() {
         return false;
     }
 
     @Override
-    public void onCreate()
-    {
+    public void onCreate() {
         updateWidgetListView();
     }
 
     @Override
-    public void onDataSetChanged()
-    {
+    public void onDataSetChanged() {
         updateWidgetListView();
     }
 
     @Override
-    public void onDestroy()
-    {
+    public void onDestroy() {
         widgetList.clear();
         db.close();
     }

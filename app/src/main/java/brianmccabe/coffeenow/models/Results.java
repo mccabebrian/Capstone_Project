@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by brian on 29/01/2017.
  */
 
-public class Results implements Serializable{
+public class Results implements Serializable {
     private String icon;
 
     private String place_id;
@@ -35,133 +35,107 @@ public class Results implements Serializable{
 
     private String[] types;
 
-    public String getIcon ()
-    {
+    public String getIcon() {
         return icon;
     }
 
-    public void setIcon (String icon)
-    {
+    public void setIcon(String icon) {
         this.icon = icon;
     }
 
-    public String getPlace_id ()
-    {
+    public String getPlace_id() {
         return place_id;
     }
 
-    public void setPlace_id (String place_id)
-    {
+    public void setPlace_id(String place_id) {
         this.place_id = place_id;
     }
 
-    public String getScope ()
-    {
+    public String getScope() {
         return scope;
     }
 
-    public void setScope (String scope)
-    {
+    public void setScope(String scope) {
         this.scope = scope;
     }
 
-    public String getReference ()
-    {
+    public String getReference() {
         return reference;
     }
 
-    public void setReference (String reference)
-    {
+    public void setReference(String reference) {
         this.reference = reference;
     }
 
-    public Geometry getGeometry ()
-    {
+    public Geometry getGeometry() {
         return geometry;
     }
 
-    public void setGeometry (Geometry geometry)
-    {
+    public void setGeometry(Geometry geometry) {
         this.geometry = geometry;
     }
 
-    public Opening_hours getOpening_hours ()
-    {
+    public Opening_hours getOpening_hours() {
         return opening_hours;
     }
 
-    public void setOpening_hours (Opening_hours opening_hours)
-    {
+    public void setOpening_hours(Opening_hours opening_hours) {
         this.opening_hours = opening_hours;
     }
 
-    public String getId ()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setId (String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Photos[] getPhotos ()
-    {
+    public Photos[] getPhotos() {
         return photos;
     }
 
-    public void setPhotos (Photos[] photos)
-    {
+    public void setPhotos(Photos[] photos) {
         this.photos = photos;
     }
 
-    public String getPrice_level ()
-    {
+    public String getPrice_level() {
         return price_level;
     }
 
-    public void setPrice_level (String price_level)
-    {
+    public void setPrice_level(String price_level) {
         this.price_level = price_level;
     }
 
-    public String getVicinity ()
-    {
+    public String getVicinity() {
         return vicinity;
     }
 
-    public void setVicinity (String vicinity)
-    {
+    public void setVicinity(String vicinity) {
         this.vicinity = vicinity;
     }
 
-    public String getName ()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName (String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getRating ()
-    {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating (String rating)
-    {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
-    public String[] getTypes ()
-    {
+    public String[] getTypes() {
         return types;
     }
 
-    public void setTypes (String[] types)
-    {
+    public void setTypes(String[] types) {
         this.types = types;
     }
 

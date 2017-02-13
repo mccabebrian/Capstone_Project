@@ -98,8 +98,8 @@ public class CafeMapFragment extends Fragment implements OnMapReadyCallback, Goo
         googleMap.getUiSettings().setMapToolbarEnabled(true);
         googleMap.getUiSettings().setZoomControlsEnabled(true);
         Results[] results = (Results[]) getArguments().getSerializable("name");
-        for(int i =0; i<results.length; i++) {
-            if(results[i].getGeometry() == null || results[i].getGeometry().getLocation() == null) {
+        for (int i = 0; i < results.length; i++) {
+            if (results[i].getGeometry() == null || results[i].getGeometry().getLocation() == null) {
                 return;
             }
             googleMap.setOnInfoWindowClickListener(this);

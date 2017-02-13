@@ -41,10 +41,9 @@
             android:theme="@style/AppTheme"></activity>
 
 
-        <receiver android:name="brianmccabe.coffeenow.ui.CoffeeNowWidgetProvider" >
-            <intent-filter >
-                <action
-                    android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+        <receiver android:name="brianmccabe.coffeenow.ui.CoffeeNowWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data

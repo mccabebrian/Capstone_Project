@@ -11,23 +11,19 @@ public class Viewport implements Serializable {
 
     private Northeast northeast;
 
-    public Southwest getSouthwest ()
-    {
+    public Southwest getSouthwest() {
         return southwest;
     }
 
-    public void setSouthwest (Southwest southwest)
-    {
+    public void setSouthwest(Southwest southwest) {
         this.southwest = southwest;
     }
 
-    public Northeast getNortheast ()
-    {
+    public Northeast getNortheast() {
         return northeast;
     }
 
-    public void setNortheast (Northeast northeast)
-    {
+    public void setNortheast(Northeast northeast) {
         this.northeast = northeast;
     }
 

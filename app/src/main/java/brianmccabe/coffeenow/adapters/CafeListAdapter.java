@@ -22,7 +22,7 @@ import brianmccabe.coffeenow.ui.CoffeeMenuActivity;
  * Created by brian on 04/02/2017.
  */
 
-public class CafeListAdapter extends ArrayAdapter<Results> implements View.OnClickListener{
+public class CafeListAdapter extends ArrayAdapter<Results> implements View.OnClickListener {
 
     private Results[] results;
     Context mContext;
@@ -39,7 +39,7 @@ public class CafeListAdapter extends ArrayAdapter<Results> implements View.OnCli
     public CafeListAdapter(Results[] results, Context context) {
         super(context, R.layout.fragment_cafelist, results);
         this.results = results;
-        this.mContext=context;
+        this.mContext = context;
 
     }
 
@@ -75,7 +75,7 @@ public class CafeListAdapter extends ArrayAdapter<Results> implements View.OnCli
                 .into(cafeImage);
 
         String rating = dataModel.getRating();
-        if(rating == null) {
+        if (rating == null) {
             ratingBar.setVisibility(View.GONE);
         } else {
             ratingBar.setRating(Float.parseFloat(dataModel.getRating()));

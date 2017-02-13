@@ -9,4 +9,4 @@
     app:layoutManager="LinearLayoutManager"
     tools:context="brianmccabe.coffeenow.ui.CafeListFragment"
     tools:listitem="@layout/fragment_cafelist"
-    android:background="@color/colorPrimaryLight"/>
+    android:background="@color/colorPrimaryLight" />

@@ -17,12 +17,12 @@ import brianmccabe.coffeenow.models.Coffee;
  */
 
 public class CartItemAdapter extends BaseAdapter {
-    private static LayoutInflater inflater=null;
+    private static LayoutInflater inflater = null;
     Context context;
     List<Coffee> coffees;
 
     public CartItemAdapter(Context context, List<Coffee> coffeeList) {
-        inflater = ( LayoutInflater )context.
+        inflater = (LayoutInflater) context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
         this.coffees = coffeeList;

@@ -121,7 +121,7 @@ public class LocationTracker extends Service implements LocationListener {
             e.printStackTrace();
         }
 
-        if(location != null) {
+        if (location != null) {
             mainActivityPresenter.onLocationChanged(location);
         }
         return location;
@@ -153,14 +153,14 @@ public class LocationTracker extends Service implements LocationListener {
 
     }
 
-    public void showSettingsAlert(){
+    public void showSettingsAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
         alertDialog.setTitle(R.string.gps_title);
         alertDialog.setMessage(R.string.gps_body);
 
         alertDialog.setPositiveButton(R.string.gps_positive, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog,int which) {
+            public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 mContext.startActivity(intent);
             }

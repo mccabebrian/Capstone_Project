@@ -13,8 +13,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
-        android:contentDescription="@string/coffee_icon"
-        android:src="@drawable/cast_album_art_placeholder" />
+        android:contentDescription="@string/coffee_icon" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -42,7 +41,7 @@
             android:textColor="@color/colorSecondaryText"
             android:layout_below="@+id/cafe_shop_title"
             android:ellipsize="end"
-            android:maxLines="2"/>
+            android:maxLines="2" />
 
         <RatingBar
             android:id="@+id/rating"
@@ -51,6 +50,6 @@
             android:numStars="5"
             android:rating="3.0"
             android:layout_alignParentBottom="true"
-            style="?android:attr/ratingBarStyleSmall"/>
+            style="?android:attr/ratingBarStyleSmall" />
     </RelativeLayout>
 </RelativeLayout>

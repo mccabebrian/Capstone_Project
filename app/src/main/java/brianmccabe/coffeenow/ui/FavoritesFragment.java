@@ -41,13 +41,13 @@ public class FavoritesFragment extends Fragment {
         DatabaseHandler db = new DatabaseHandler(getContext());
         List<Coffee> coffees = db.getAllCoffees();
 
-        if(coffees.size() == 0){
+        if (coffees.size() == 0) {
             return view;
         }
         tv = (TextView) view.findViewById(R.id.no_fav_text);
-        gv=(GridView) view.findViewById(R.id.gridview);
-            tv.setVisibility(View.GONE);
-        cartButton =(FloatingActionButton) view.findViewById(R.id.cart_button);
+        gv = (GridView) view.findViewById(R.id.gridview);
+        tv.setVisibility(View.GONE);
+        cartButton = (FloatingActionButton) view.findViewById(R.id.cart_button);
 
         cartButton.setOnClickListener(new View.OnClickListener() {
             @Override

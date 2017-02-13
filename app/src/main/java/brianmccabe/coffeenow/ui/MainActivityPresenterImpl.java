@@ -38,14 +38,14 @@ class MainActivityPresenterImpl {
         Call<PlacesResponse> call = apiService.getNearbyPlaces(coordinates, "5500", "cafe", "AIzaSyCC7-iGM8WNtePjBF_FMjEHi1YV7O5pClw");
         call.enqueue(new Callback<PlacesResponse>() {
             @Override
-            public void onResponse(Call<PlacesResponse>call, Response<PlacesResponse> response) {
+            public void onResponse(Call<PlacesResponse> call, Response<PlacesResponse> response) {
                 Results[] places = response.body().getResults();
                 mainActivityPresenter.onReceivedResults(places);
                 mainActivityPresenter.hideLoader();
             }
 
             @Override
-            public void onFailure(Call<PlacesResponse>call, Throwable t) {
+            public void onFailure(Call<PlacesResponse> call, Throwable t) {
                 Log.e(TAG, t.toString());
                 mainActivityPresenter.hideLoader();
             }
