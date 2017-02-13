@@ -3,9 +3,9 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'bmcc222'
+            keyAlias 'bmccabe'
             keyPassword 'password'
-            storeFile file("$rootDir/keystore.jks")
+            storeFile file('C:/Users/brian/CoffeeNow/keystore3.jks')
             storePassword 'password'
         }
     }
