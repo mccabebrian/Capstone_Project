@@ -15,19 +15,19 @@ import java.util.List;
 
 import brianmccabe.coffeenow.R;
 import brianmccabe.coffeenow.data.DatabaseHandler;
-import brianmccabe.coffeenow.models.temp;
+import brianmccabe.coffeenow.models.Coffee;
 
 /**
  * Created by brian on 11/02/2017.
  */
 
-public class MenuItemAdapter extends BaseAdapter {
+public class temp extends BaseAdapter {
 
-    List<temp> coffeeList;
+    List<Coffee> coffeeList;
     Context context;
     private static LayoutInflater inflater = null;
 
-    public MenuItemAdapter(Context context, List<temp> list) {
+    public temp(Context context, List<Coffee> list) {
         this.coffeeList = list;
         this.context = context;
         inflater = (LayoutInflater) context.
