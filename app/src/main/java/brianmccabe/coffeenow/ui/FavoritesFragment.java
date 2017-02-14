@@ -1,11 +1,14 @@
 package brianmccabe.coffeenow.ui;
 
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +23,14 @@ import brianmccabe.coffeenow.adapters.MenuItemAdapter;
 import brianmccabe.coffeenow.data.CoffeeNowContentProvider;
 import brianmccabe.coffeenow.data.DatabaseHandler;
 import brianmccabe.coffeenow.models.Coffee;
+import brianmccabe.coffeenow.ui.ShoppingCart;
 
 
-public class FavoritesFragment extends Fragment {
+public class FavoritesFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+    GridView gv;
+    TextView tv;
+    FloatingActionButton cartButton;
+    private static final int LOADER_ID = 1;
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -36,19 +44,35 @@ public class FavoritesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        GridView gv;
-        TextView tv;
-        FloatingActionButton cartButton;
+
+
 
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
         // Inflate the layout for this fragment
-        DatabaseHandler db = new DatabaseHandler(getContext());
+
+        tv = (TextView) view.findViewById(R.id.no_fav_text);
+        gv = (GridView) view.findViewById(R.id.gridview);
+
+        cartButton = (FloatingActionButton) view.findViewById(R.id.cart_button);
+
+        getLoaderManager().initLoader(LOADER_ID, null, this);
+
+        return view;
+    }
 
 
+    @Override
+    public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String URL = CoffeeNowContentProvider.URL;
 
         Uri coffee = Uri.parse(URL);
-        Cursor c = getActivity().getContentResolver().query(coffee, null, null, null, getContext().getString(R.string.content_provider_name));
+
+        return new android.support.v4.content.CursorLoader(getContext(), coffee,
+                null, null, null, "name");
+    }
+
+    @Override
+    public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor c) {
         List<Coffee> coffees = new ArrayList<>();
         if (c != null) {
             if (c.moveToFirst()) {
@@ -68,24 +92,26 @@ public class FavoritesFragment extends Fragment {
             c.close();
         }
 
-        if (coffees.size() == 0) {
-            return view;
+        if (coffees.size() != 0) {
+
+            tv.setVisibility(View.GONE);
+
+
+            cartButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), ShoppingCart.class);
+                    startActivity(intent);
+                }
+            });
+
+            gv.setVisibility(View.VISIBLE);
+            gv.setAdapter(new MenuItemAdapter(getContext(), coffees));
         }
-        tv = (TextView) view.findViewById(R.id.no_fav_text);
-        gv = (GridView) view.findViewById(R.id.gridview);
-        tv.setVisibility(View.GONE);
-        cartButton = (FloatingActionButton) view.findViewById(R.id.cart_button);
+    }
 
-        cartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ShoppingCart.class);
-                startActivity(intent);
-            }
-        });
+    @Override
+    public void onLoaderReset(android.support.v4.content.Loader<Cursor> loader) {
 
-        gv.setVisibility(View.VISIBLE);
-        gv.setAdapter(new MenuItemAdapter(getContext(), coffees));
-        return view;
     }
 }

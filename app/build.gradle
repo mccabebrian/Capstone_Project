@@ -3,9 +3,9 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'bmccabe'
+            keyAlias 'bmcc222'
             keyPassword 'password'
-            storeFile file('C:/Users/brian/CoffeeNow/keystore3.jks')
+            storeFile file("$rootDir/keystore.jks")
             storePassword 'password'
         }
     }
@@ -19,7 +19,6 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
